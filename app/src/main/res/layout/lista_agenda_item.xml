@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/Compromisso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Compromisso"/>
+
+    <ImageButton
+        android:id="@+id/CompromissoEdit"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="300dp"
+        android:onClick="editItem"
+        android:background="@null"
+        android:src="@mipmap/ic_launcher_editt"
+        />
+
+
+    <TextView
+        android:id="@+id/Descricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Descrição"
+        android:layout_below="@+id/Compromisso"/>
+
+
+
+
+    <TextView
+        android:id="@+id/Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Data"
+        android:layout_below="@+id/Descricao"
+        tools:ignore="UnknownId" />
+
+
+
+    <ImageButton
+        android:id="@+id/Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/ic_action_delete"
+        android:layout_below="@id/Data"
+        android:layout_marginTop="10dp"
+
+        />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/backRecycler"
+        android:layout_below="@id/Delete"
+        android:layout_marginTop="10dp"
+        android:focusable="false" />
+</RelativeLayout>

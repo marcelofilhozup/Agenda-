@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NovoCompromisso">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/editCompromisso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:textSize="25dp"
+            android:text="Compromisso"/>
+        <EditText
+            android:id="@+id/editTextCompromisso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompromisso"
+            android:hint="Digite o compromisso"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/editDescricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/editTextCompromisso"
+            android:textSize="25dp"
+            android:text="Descrição"/>
+
+        <EditText
+            android:id="@+id/editTextDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editDescricao"
+            android:hint="Digite a descrição"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/editData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/editTextDescricao"
+            android:textSize="25dp"
+            android:text="Data"/>
+
+        <EditText
+            android:id="@+id/editTextData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editData"
+            android:hint="Digite a Data"
+            android:layout_centerInParent="true"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Salvar"
+            android:onClick="launchSalvar"
+            android:background="@color/colorPrimary"/>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
