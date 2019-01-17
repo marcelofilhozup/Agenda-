@@ -11,6 +11,7 @@ public class EditAgenda extends AppCompatActivity {
     private EditText editTextCompromisso;
     private EditText editTextDescricao;
     private EditText editTextData;
+    private EditText editTextteste;
 
     private int index;
 
