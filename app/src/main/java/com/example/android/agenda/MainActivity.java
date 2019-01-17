@@ -1,5 +1,6 @@
 package com.example.android.agenda;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,8 +12,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements OnEditListener {
 
@@ -31,12 +43,18 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
 
     public static final int TEXT_REQUEST = 1;
 
+    TextView mEditText;
+
+    public MainActivity() throws FileNotFoundException {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mEditText = findViewById(R.id.TESTE);
 
 
 
@@ -51,6 +69,63 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void salvarF(View v){
+
+        String text = "salvarAR";
+        FileOutputStream fos = null;
+
+        try {
+            fos = openFileOutput("FileName",MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(fos!= null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+    }
+    public void carregar(View v){
+        FileInputStream fis = null;
+
+        try {
+            fis = openFileInput("FileName");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while((text = br.readLine())!= null){
+                sb.append(text).append("\n");
+            }
+
+            mEditText.setText(sb.toString());
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     @Override
