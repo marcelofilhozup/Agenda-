@@ -1,6 +1,7 @@
 package com.example.android.agenda;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +33,7 @@ public class NovoCompromisso extends AppCompatActivity {
         Compromisso reply2 = new Compromisso(
                 mMessageCompromisso.getText().toString(),mMessageDescricao.getText().toString(),mMessageData.getText().toString());
         Intent replyIntent = new Intent();
-        replyIntent.putExtra(EXTRA_MESSAGE, reply2);
+        replyIntent.putExtra(EXTRA_MESSAGE, (Parcelable) reply2);
         setResult(RESULT_OK, replyIntent);
         finish();
     }

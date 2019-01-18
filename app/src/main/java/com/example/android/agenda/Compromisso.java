@@ -3,9 +3,10 @@ package com.example.android.agenda;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Compromisso implements Parcelable  {
+public class Compromisso implements Parcelable,Serializable {
 
     private String texto1;
     private String texto2;
@@ -74,6 +75,10 @@ public class Compromisso implements Parcelable  {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String toString() {
+        return "Compromisso:" + texto1 + "\nDescricao: " + texto2 + "\nData: " + date;
     }
 }
 

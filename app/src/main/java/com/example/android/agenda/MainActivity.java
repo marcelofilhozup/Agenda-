@@ -3,6 +3,8 @@ package com.example.android.agenda;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +22,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
 
     private RecyclerView mRecyclerView;
     private AgendaListAdapter mAdapter;
+
     private final LinkedList<Compromisso> listaCompromisso = new LinkedList<>();
+    private  LinkedList<Compromisso> aux = new LinkedList<>();
 
     public static final String EXTRA_MESSAGE_INDEX =
             "INDEX";
@@ -38,10 +46,11 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
             "OBJECT";
     public static final String EXTRA_MESSAGE_EDIT =
             "TRUE";
-
+    //LinkedList<Compromisso> myList;
     private final int REQUEST_CODE_EDIT = 101;
 
     public static final int TEXT_REQUEST = 1;
+    Compromisso simpleClass;
 
     TextView mEditText;
 
@@ -58,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
 
 
 
+
         listaCompromisso.addLast(new Compromisso("Academia","Levar luvinha","hoje"));
         listaCompromisso.addLast(new Compromisso("Médico","Rondom, 133","amanhã"));
 
@@ -71,61 +81,35 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void salvarF(View v){
+    Compromisso t = new Compromisso("TESTE1","TESTE2","TESTE3");
 
-        String text = "salvarAR";
-        FileOutputStream fos = null;
+    public void salvarF(View v) throws IOException {
 
-        try {
-            fos = openFileOutput("FileName",MODE_PRIVATE);
-            fos.write(text.getBytes());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(fos!= null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
+        FileOutputStream fos = this.openFileOutput("oi.txt", Context.MODE_PRIVATE);
+        ObjectOutputStream os = new ObjectOutputStream(fos);
+        os.writeObject(listaCompromisso);
+        os.close();
+        fos.close();
 
     }
-    public void carregar(View v){
-        FileInputStream fis = null;
-
-        try {
-            fis = openFileInput("FileName");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-
-            while((text = br.readLine())!= null){
-                sb.append(text).append("\n");
-            }
-
-            mEditText.setText(sb.toString());
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(fis != null){
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void carregar(View v) throws IOException, ClassNotFoundException {
+        FileInputStream fis = this.openFileInput("oi.txt");
+        ObjectInputStream is = new ObjectInputStream(fis);
+        aux = (LinkedList<Compromisso>) is.readObject();
+        Compromisso test = aux.get(0);
+        mEditText.setText(test.getTexto1());
+        is.close();
+        fis.close();
+    }
 
+
+
+    public void imprimir(View v){
+
+        Compromisso test = aux.get(2);
+        mEditText.setText(test.getTexto1());
     }
 
     @Override
@@ -184,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements OnEditListener {
         Intent intent = new Intent(this, EditAgenda.class);
         intent.putExtra(EXTRA_MESSAGE_EDIT, true);
         intent.putExtra(EXTRA_MESSAGE_INDEX, indice);
-        intent.putExtra(EXTRA_MESSAGE_OBJECT, comp);
+        intent.putExtra(EXTRA_MESSAGE_OBJECT, (Parcelable) comp);
         startActivityForResult(intent, REQUEST_CODE_EDIT);
 
     }

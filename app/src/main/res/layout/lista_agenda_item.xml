@@ -48,6 +48,18 @@
         android:src="@mipmap/ic_launcher_editt"
         />
 
+    <ImageButton
+        android:id="@+id/Imprimir"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="300dp"
+        android:onClick="imprimir"
+        android:layout_below="@+id/CompromissoEd"
+        android:background="@null"
+        android:src="@mipmap/ic_launcher_editt"
+        />
+
 
     <TextView
         android:id="@+id/Descricao"
