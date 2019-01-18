@@ -19,6 +19,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Wo
 
 
     private OnEditListener editListener;
+    private View.OnClickListener deleteListener;
 
     private final LinkedList<Compromisso> mAgendaList;
 
@@ -29,6 +30,7 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Wo
         mInflater = LayoutInflater.from(context);
         this.mAgendaList = agendaList;
         this.editListener = editListener;
+        this.deleteListener = deleteListener;
     }
 
     public AgendaListAdapter.WordViewHolder onCreateViewHolder(ViewGroup parent,
@@ -53,10 +55,12 @@ public class AgendaListAdapter extends RecyclerView.Adapter<AgendaListAdapter.Wo
         holder.b.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
 
+
                 int mPosition = position;
                 mAgendaList.remove(mPosition);
                 notifyItemRemoved(mPosition);
                 notifyItemRangeChanged(mPosition, mAgendaList.size());
+
 
             }
         });
